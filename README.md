@@ -2,53 +2,32 @@
 
 ## Sobre o projeto
 
-Neste desafio, montei o modelo lógico de um banco de dados para uma oficina mecânica e criei os scripts SQL para colocar esse modelo em prática.
+Neste desafio, criei um banco de dados para uma oficina mecânica usando PostgreSQL. A ideia foi organizar as informações dos clientes, seus veículos, os mecânicos e os serviços realizados na oficina.
 
-A ideia é organizar os clientes e seus veículos, os mecânicos que trabalham nas equipes e as ordens de serviço da oficina. Cada ordem registra o veículo atendido, a equipe responsável, os serviços realizados e as peças utilizadas.
+Primeiro, montei o modelo lógico com as tabelas e seus relacionamentos. Depois, criei os comandos SQL para montar o banco, adicionei alguns dados de exemplo e fiz consultas para testar o funcionamento.
 
 ## O que foi feito
 
-- Criação de **10 tabelas** com chaves primárias e estrangeiras, além de regras para evitar dados inválidos.
-- Relacionamento entre **clientes e veículos** e entre **veículos e ordens de serviço**.
-- Relacionamento de **muitos para muitos** entre mecânicos e equipes, e entre ordens de serviço, peças e serviços.
-- Cadastro de dados fictícios para testar o banco.
-- **18 consultas SQL** com `SELECT`, `WHERE`, `ORDER BY`, `GROUP BY`, `HAVING`, `JOIN` e cálculos.
+O projeto possui **10 tabelas**, com chaves primárias, chaves estrangeiras e algumas regras para evitar dados incorretos. As ordens de serviço registram o veículo atendido, a equipe responsável, os serviços feitos e as peças utilizadas.
 
-O valor total de cada ordem é calculado a partir dos serviços e das peças, sem precisar guardar um total duplicado na tabela.
+Também preparei **18 consultas SQL**, usando `SELECT`, `WHERE`, `ORDER BY`, `GROUP BY`, `HAVING` e `JOIN`, além de cálculos.
+
+Com essas consultas, é possível descobrir quantos serviços foram feitos, quais mecânicos fazem parte de cada equipe e quanto custa uma ordem de serviço.
 
 ## Modelo lógico
 
 ![Modelo lógico da oficina](diagramas/modelo_logico.png)
 
-## Perguntas respondidas pelas consultas
-
-Algumas perguntas que busquei responder foram: quais veículos pertencem a cada cliente? Quantas ordens de serviço cada cliente possui? Quais mecânicos trabalham em cada equipe? Qual o custo de uma ordem de serviço? Quais peças estão com estoque baixo? E quais serviços foram feitos mais de uma vez?
-
-As perguntas estão comentadas no arquivo de consultas, junto com cada comando SQL.
-
 ## Arquivos do projeto
 
-- `sql/01_criar_esquema.sql` — cria o esquema e as tabelas.
-- `sql/02_inserir_dados.sql` — insere dados de exemplo.
-- `sql/03_consultas.sql` — contém as 18 consultas do desafio.
-- `sql/04_testes_integridade.sql` — verifica alguns relacionamentos e restrições.
-- `diagramas/modelo_logico.png` — imagem do modelo lógico.
-- `diagramas/modelo_logico.svg` — versão do desenho para ampliar sem perder qualidade.
-- `diagramas/modelo_logico.dot` — arquivo editável do diagrama (Graphviz).
+- `01_criar_esquema.sql` — cria as tabelas do banco.
+- `02_inserir_dados.sql` — adiciona dados para testes.
+- `03_consultas.sql` — contém as consultas SQL.
+- `04_testes_integridade.sql` — testa as regras do banco.
+- `diagramas/` — contém o modelo lógico.
 
 ## Como executar
 
-Usei **PostgreSQL** como banco de dados. No **pgAdmin 4**, crie ou abra um banco de testes e execute os arquivos na seguinte ordem:
+O projeto foi desenvolvido para PostgreSQL. Para testar, basta abrir o pgAdmin 4, selecionar um banco de testes e executar os três primeiros arquivos SQL na ordem indicada.
 
-1. `01_criar_esquema.sql`
-2. `02_inserir_dados.sql`
-3. `03_consultas.sql`
-4. `04_testes_integridade.sql` (opcional)
-
-**Atenção:** o primeiro script apaga e recria o esquema `oficina`. Por isso, não execute em um banco com dados importantes nesse esquema.
-
-## Observação
-
-Como o modelo conceitual original da oficina não estava anexado, utilizei um cenário comum de oficina mecânica como base. Assim, o modelo pode ser ajustado caso o desenho apresentado pelo professor tenha entidades ou relacionamentos diferentes.
-
-O controle de estoque é ilustrativo: o banco guarda quantidades disponíveis e peças utilizadas nas ordens, mas não realiza baixa automática de estoque. Os valores de cada item ficam registrados na própria ordem para preservar o preço cobrado na época.
+O primeiro script recria o esquema `oficina`, por isso é importante utilizá-lo apenas em um ambiente de testes.
